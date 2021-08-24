@@ -49,12 +49,16 @@ export function SchedulingDetails() {
     navigation.navigate('SchedulingComplete')
   }
 
+  function handleBack() {
+    navigation.goBack();
+  }
+
   const theme = useTheme();
 
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => { }} />
+        <BackButton onPress={handleBack} />
       </Header>
 
       <CarImages>
