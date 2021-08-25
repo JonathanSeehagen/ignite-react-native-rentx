@@ -6,12 +6,7 @@ import { Accessory } from '../../components/Accessory';
 import { Button } from '../../components/Button';
 import { CarDTO } from '../../dtos/CarDTO';
 
-import speedSvg from '../../assets/speed.svg';
-import accelerationSvg from '../../assets/acceleration.svg';
-import forceSvg from '../../assets/force.svg';
-import gasolineSvg from '../../assets/gasoline.svg';
-import exchangeSvg from '../../assets/exchange.svg';
-import peopleSvg from '../../assets/people.svg';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 import {
   Container,
@@ -38,9 +33,8 @@ export function CarDetails() {
   const route = useRoute();
   const { car } = route.params as Params;
 
-
   function handleConfirmRental() {
-    navigation.navigate('Scheduling')
+    navigation.navigate('Scheduling' as never, { car } as never)
   }
 
   function handleBack() {
@@ -78,7 +72,7 @@ export function CarDetails() {
               <Accessory
                 key={accessory.type}
                 name={accessory.name}
-                icon={speedSvg} />
+                icon={getAccessoryIcon(accessory.type)} />
             ))
           }
         </Accessories>

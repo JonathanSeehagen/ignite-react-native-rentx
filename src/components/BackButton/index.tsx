@@ -1,14 +1,14 @@
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons'
-import { BorderlessButton } from 'react-native-gesture-handler';
+import { BorderlessButtonProps } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components';
 
 import {
   Container
 } from './styles';
 
-interface Props extends BorderlessButton {
-  color: string;
+interface Props extends BorderlessButtonProps {
+  color?: string;
 }
 
 export function BackButton({ color, ...rest }: Props) {

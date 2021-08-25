@@ -21,7 +21,7 @@ export function SchedulingComplete() {
   const navigation = useNavigation();
 
   function handleConfirm() {
-    navigation.navigate('Home')
+    navigation.navigate('Home' as never)
   }
 
   return (
