@@ -14,6 +14,8 @@ import { Bullet } from '../../../components/Bullet';
 import { PasswordInput } from '../../../components/PasswordInput';
 import { Button } from '../../../components/Button';
 
+import api from '../../../services/api';
+
 import {
   Container,
   Header,
@@ -46,7 +48,7 @@ export function SignUpSecondStep() {
     navigation.goBack();
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!password || !passwordConfirm) {
       return Alert.alert('Informe a senha e a confirmação!');
     }
@@ -55,13 +57,21 @@ export function SignUpSecondStep() {
       return Alert.alert('As senhas não são iguais!');
     }
 
-    navigation.navigate('Confirmation' as never, {
-      nextScreenRoute: 'SignIn',
-      title: 'Conta Criada!',
-      message: `Agora é só fazer login\ne aproveitar`,
-    } as never);
-    //Enviar para API e cadastrar
-    //Chamar tela de confirmação de cadastro
+    await api.post('/users', {
+      name: user.name,
+      email: user.email,
+      driver_license: user.driverLicense,
+      password
+    }).then(() => {
+      navigation.navigate('Confirmation' as never, {
+        nextScreenRoute: 'SignIn',
+        title: 'Conta Criada!',
+        message: `Agora é só fazer login\ne aproveitar`,
+      } as never);
+    }).catch((error) => {
+      console.log(error);
+      Alert.alert('Ops', 'Não foi possível cadastrar');
+    });
   }
 
   return (
